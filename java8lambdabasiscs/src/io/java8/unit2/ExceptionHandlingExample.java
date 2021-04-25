@@ -31,6 +31,15 @@ public class ExceptionHandlingExample {
     }
 
     private static BiConsumer<Integer,Integer> wrapperLambda(BiConsumer<Integer,Integer> consumer){
-        return consumer;
+        return (a,b) -> {
+            try {
+                System.out.println("Executing from wrapper lambda");
+                consumer.accept(a, b);     
+            } catch (Exception e) {
+                System.err.println("Exception in wrapper lambda");
+               // e.printStackTrace();
+            }
+           
+         };
     }
 }
