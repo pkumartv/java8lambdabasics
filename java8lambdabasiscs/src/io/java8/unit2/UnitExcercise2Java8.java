@@ -1,22 +1,24 @@
-package io.java8;
+package io.java8.unit2;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class UnitExcercise1Java8 {
+import io.java8.Person;
+
+public class UnitExcercise2Java8 {
 
     // Step2: Create an method that prints all elements in the list
     // Step3: Create a method that prints all people that have last name beginning
     // with C
 
     //Using functional interfaces available in Java8 at java.util.function  
-    private  static void filterByCondition(List<Person> people, Predicate<Person> predicate) {
+    private  static void performConditionally(List<Person> people, Predicate<Person> predicate, Consumer<Person> consumer) {
         for (Person person : people) {
             if (predicate.test(person))
-                System.out.println(person);
-
+                    consumer.accept(person);
         }
     }
 
@@ -30,13 +32,13 @@ public class UnitExcercise1Java8 {
         Collections.sort(people, (o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 
         System.out.println("Persons sorted on last name");
-        filterByCondition(people, p -> true);
+        performConditionally(people, p -> true, p -> System.out.println(p) );
 
         System.out.println("Persons with last name starting with C");
-        filterByCondition(people, p -> p.getLastName().startsWith("C"));
+        performConditionally(people, p -> p.getLastName().startsWith("C"),p -> System.out.println(p));
 
         System.out.println("Persons with first name starting with C");
-        filterByCondition(people, p -> p.getFirstName().startsWith("C"));
+        performConditionally(people, p -> p.getFirstName().startsWith("C"),p -> System.out.println(p.getFirstName()));
     }
 
 }
