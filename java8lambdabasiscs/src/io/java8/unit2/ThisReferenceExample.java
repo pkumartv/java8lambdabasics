@@ -9,24 +9,23 @@ public class ThisReferenceExample {
 
     public void  execute(){
 
+        doProcess(20, i-> {
+            System.out.println(i);
+            System.out.println(this); //lambda doesnt override this reference. It still referes to the  this from main
+        });
+
     }
     public static void main(String[] args) {
         ThisReferenceExample thisReferenceExample= new ThisReferenceExample();
-        thisReferenceExample.doProcess(10, new Process(){
+        // thisReferenceExample.doProcess(10, i-> {
+        //     System.out.println(i);
+        //    // System.out.println(this); //lambda doesnt override this reference. It still referes to the  this from main
+        // });
+        thisReferenceExample.execute();
+    }
 
-            @Override
-            public void process(int i) {
-               System.out.println(i );
-               System.out.println(this);
-                
-            }
-
-            @Override
-            public String toString() {
-                // TODO Auto-generated method stub
-                return "This is the anonymouse inner class: "+super.toString();
-            }
-            
-        });
+    @Override
+    public String toString() {
+        return "This reference of parent class ThisReferenceExample: "+super.toString();
     }
 }
